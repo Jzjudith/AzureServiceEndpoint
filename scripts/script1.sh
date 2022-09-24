@@ -16,6 +16,10 @@ sudo cat > /var/www/html/index.html <<'EOF'
   </p>
 EOF
 
-# iptables -A INPUT -i eth0 -p tcp -m tcp --dport 3306 -j ACCEPT
-# sudo netstat -anltp|grep :3306
-# sudo ssh -fNg -L 3307:127.0.0.1:3306 azurevmuser@servername
+# storage map code
+# ssh -t azureuser@$APPSERVERIP \
+#     "mkdir azureshare; \
+#     sudo mount -t cifs //$STORAGEACCT.file.core.windows.net/erp-data-share azureshare \
+#     -o vers=3.0,username=$STORAGEACCT,password=$STORAGEKEY,dir_mode=0777,file_mode=0777,sec=ntlmssp; findmnt \
+#     -t cifs; exit; bash"
+
